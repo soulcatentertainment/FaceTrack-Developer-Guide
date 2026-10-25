@@ -1,41 +1,54 @@
 # Live Capture Pipeline
 
-FaceTrack includes a native UDP streaming server designed for low-latency facial tracking integration into external software.
+The **Live Capture Pipeline** enables real-time, low-latency streaming of facial performance capture and head pose kinematics directly over a local network. Built for interactive use cases—including virtual production in Unreal Engine or Unity, live VTubing, and real-time avatar puppeteering—it delivers frame-by-frame tracking data synchronously without the overhead of heavy transport protocols.
 
-To enable this feature, go to **Settings > Live Capture > Enable Streaming**.
+By broadcasting lightweight UDP datagrams, FaceTrack allows any external software or custom runtime client to ingest facial animation coefficients with minimal latency and zero handshaking overhead.
 
-## Network Protocol (UDP)
+### Key Capabilities
 
-### Socket Configuration
+- **Minimal Transport Latency:** Uses connectionless UDP sockets to avoid head-of-line blocking and eliminate packet retransmission lag.
+- **Unified State Transmission:** Delivers normalized 6-DOF head orientation and all 53 facial blendshape channels synchronized in a single packet.
+- **Flexible Deployment:** Supports single-machine loopback pipelines (`127.0.0.1`) as well as dedicated multi-machine LAN broadcast configurations.
+- **Engine-Agnostic Ingestion:** Compatible with any programming environment supporting standard socket programming (C#, C++, Python, Rust).
 
-- **Default Protocol:** UDP (User Datagram Protocol)
+---
 
-- **Default Host / IP:** `127.0.0.1`
+## Configuration & Activation
 
-- **Default Target Port:** `9000`
+To start streaming tracking data from FaceTrack:
 
-- **Transmit State:** Broadcasts only when the FaceTrack application is in **Avatar Preview** mode. A small chain icon can be seen when the Live Capture mode is active.
+1. Navigate to **Settings** > **Live Capture**.
+2. Toggle **Enable Streaming** on.
+3. Switch FaceTrack to **Avatar Preview** mode.
 
-To make it discoverable through local network, set the IP to `0.0.0.0` and set the IP address on the Reciever to the IP of the machine that runs FaceTrack.
+> **Status Indicator:** Data is transmitted only while in **Avatar Preview** mode. A **chain icon** appears in the interface to indicate an active broadcast state.
 
-Make sure the Firewall doesn't block the connection. Administrator access is required to make changes to the rules.
+---
+
+## Network Protocol Configuration
+
+### Default Socket Parameters
+
+| Parameter               | Default Value                  | Notes                                    |
+| :---------------------- | :----------------------------- | :--------------------------------------- |
+| **Protocol**            | `UDP` (User Datagram Protocol) | Fast, connectionless transport.          |
+| **Default Host / IP**   | `127.0.0.1`                    | Local loopback (same-machine streaming). |
+| **Default Target Port** | `9000`                         | Configurable receiving port.             |
+
+### Local Network (LAN) Setup
+
+To stream data from FaceTrack to another computer across a local network:
+
+1. In FaceTrack settings, set the bind address / IP to `0.0.0.0` (listens on all available network interfaces).
+2. On the receiving machine (e.g., a secondary workstation running Unreal Engine), configure the client listener to target the local IPv4 address of the host machine running FaceTrack (e.g., `192.168.1.X`).
+3. **Firewall Requirements:** Ensure inbound UDP traffic on port `9000` is permitted on the host machine. You may need administrative privileges to create an inbound firewall rule in Windows Defender or corporate firewall tools.
+
+---
 
 ## Datagram Payload Format
 
-Each UDP packet is encoded as a raw UTF-8 string consisting of two sections separated by a vertical bar pipe (`|`):
+Each packet is serialized as a raw, human-readable UTF-8 string divided into two distinct sections by a vertical bar delimiter (`|`):
 
 ```text
 <qx>,<qy>,<qz>,<qw>|<val_0>,<val_1>,<val_2>,...,<val_52>
-```
-
-| Field Segment       | Data Type                 | Description                                                                          |
-| ------------------- | ------------------------- | ------------------------------------------------------------------------------------ |
-| `qx,qy,qz,qw`       | 4 Comma-Separated Floats  | Head rotation quaternion in local space.                                             |
-| <code>&#124;</code> | ASCII Character (`0x7C`)  | Delimiter separating head orientation from facial weights.                           |
-| `val_0,...,val_52`  | 53 Comma-Separated Floats | Continuous array of all 53 facial blendshape weights, indexed strictly from 0 to 52. |
-
-### Example Packet Payload
-
-```text
-0.029712,-0.002083,0.025074,0.999241|0.6347,0.6399,0.0219,0.0284,0.0023,0.0017,0.0,0.0,0.1614,...
 ```
