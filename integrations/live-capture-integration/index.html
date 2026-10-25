@@ -739,7 +739,7 @@
 <a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
 <a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"JawOpen: </span><span class="si">{</span><span class="n">jaw_open</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | Blinks: (</span><span class="si">{</span><span class="n">blink_left</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">blink_right</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 </code></pre></div>
-<p>You can also download the full python receiver sample <a href="../../scripts/livecapture_python_sample.py">here</a> to test out the Live Capture streaming.</p>
+<p>You can also download the full python receiver sample <a href="https://github.com/soulcatentertainment/FaceTrack-Developer-Guide/blob/main/scripts/livecapture_python_sample.py">here</a> to test out the Live Capture streaming.</p>
 <hr />
 <h2 id="c-unity-receiver-thread-safe-runtime">C# / Unity Receiver (Thread-Safe Runtime)</h2>
 <p>This component uses a background listener thread to prevent main-thread latency spikes in Unity. The incoming payload is locked, copied into thread-safe buffers, and applied to a <code>SkinnedMeshRenderer</code> during Unity's standard <code>Update()</code> loop.</p>
