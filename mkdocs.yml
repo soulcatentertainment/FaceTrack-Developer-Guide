@@ -40,5 +40,5 @@ nav:
       - File Export Formats: pipelines/file-export.md
       - Live Capture (UDP): pipelines/live-capture.md
   - Integrations:
-      - Python Receiver: integrations/live-capture-integration.md
-      # - Unity / C#: integrations/unity.md
+      - Live Capture Samples: integrations/live-capture-integration.md
+      # - Importer Samples: integrations/file-importer-integration.md
