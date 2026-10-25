@@ -25,7 +25,7 @@ By decoupling the capture session from runtime rendering, you can cleanly import
 
 You can download the official importer add-on for Blender [here](https://github.com/soulcatentertainment/FaceTrack-Developer-Guide/blob/main/scripts/blender_ftd_importer.py).
 
-- **Supported Versions:** Blender 3.6+ / 4.x
+- **Supported Versions:** Blender 5.2+
 - **Features:** Automatic rig detection, shape key curve generation, and framerate synchronization.
 
 ---
