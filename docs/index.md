@@ -1,17 +1,17 @@
 # FaceTrack Developer Guide
 
-Welcome to the official developer integration guide for **FaceTrack** by SOUL CAT Entertainment Sdn Bhd[cite: 2]. This documentation provides the technical specifications, file schemas, network protocols, and rigging kinematics required to integrate third-party applications, game engines, and virtual avatar runtimes[cite: 1, 2].
+Welcome to the official developer integration guide for **FaceTrack** by SOUL CAT Entertainment Sdn Bhd[cite: 2]. This documentation provides the technical specifications, file schemas, network protocols, and rigging kinematics required to integrate third-party applications, game engines, and virtual avatar runtimes.
 
 ---
 
 ## System Overview & Architecture
 
-FaceTrack uses NVIDIA RTX Maxine and Audio2Face deep-learning frameworks to extract high-fidelity facial performance metrics from webcam video, pre-recorded footage, or audio files[cite: 1, 2]. 
+FaceTrack uses NVIDIA RTX Maxine and Audio2Face deep-learning frameworks to extract high-fidelity facial performance metrics from webcam video, pre-recorded footage, or audio files.
 
-The tracking system outputs a standardized 53-channel blendshape rig (based on the ARKit standard) paired with local head orientation quaternions[cite: 1, 2]. Facial tracking data is delivered through two distinct pipelines[cite: 1, 2]:
+The tracking system outputs a standardized 53-channel blendshape rig (based on the ARKit standard) paired with local head orientation quaternions. Facial tracking data is delivered through two distinct pipelines:
 
-* **File Export Pipeline:** Frame-by-frame baked data saved as either `.ftd` (a lightweight, sparse streaming log) or `.json` (human-readable structured data)[cite: 1, 2].
-* **Live Capture Pipeline:** Low-latency real-time UDP socket streaming transmitting head orientation and 53 blendshape coefficients simultaneously[cite: 1, 2].
+- **File Export Pipeline:** Frame-by-frame baked data saved as either `.ftd` (a lightweight, sparse streaming log) or `.json` (human-readable structured data).
+- **Live Capture Pipeline:** Low-latency real-time UDP socket streaming transmitting head orientation and 53 blendshape coefficients simultaneously.
 
 ---
 
@@ -21,33 +21,33 @@ Explore the dedicated documentation modules below based on your development and 
 
 ### Specifications
 
-* **[53 Facial Blendshape Channels](specifications/blendshapes.md)**[cite: 2]
-  * **Contents:** Complete index mapping (channels 0 to 52) across ARKit-compatible facial expressions, along with known channel constraints (e.g., zeroed `cheekPuff` targets and omitted tongue tracking)[cite: 1, 2].
-  * **Use Cases:** Standardizing custom character blendshape names, creating facial morph targets in DCC software (Blender, Maya, ZBrush), and setting up animation retargeting profiles.
+- **[53 Facial Blendshape Channels](specifications/blendshapes.md)**[cite: 2]
+  - **Contents:** Complete index mapping (channels 0 to 52) across ARKit-compatible facial expressions, along with known channel constraints (e.g., zeroed `cheekPuff` targets and omitted tongue tracking).
+  - **Use Cases:** Standardizing custom character blendshape names, creating facial morph targets in DCC software (Blender, Maya, ZBrush), and setting up animation retargeting profiles.
 
-* **[Rigging & Kinematics Implementation](pipelines/kinematics.md)**[cite: 2]
-  * **Contents:** Mathematical coordinate conversions (scalar-first ordering for Blender vs. axis-negation for Unity), linear Euler remapping formulas for rigs lacking head bones, and differential eye gaze kinematics for pitch/yaw bone rotation[cite: 1, 2].
-  * **Use Cases:** Translating raw quaternion tracking data to skeletal transforms, automating procedural look-at eye bones, and creating headless avatar morph setups.
+- **[Rigging & Kinematics Implementation](pipelines/kinematics.md)**[cite: 2]
+  - **Contents:** Mathematical coordinate conversions (scalar-first ordering for Blender vs. axis-negation for Unity), linear Euler remapping formulas for rigs lacking head bones, and differential eye gaze kinematics for pitch/yaw bone rotation.
+  - **Use Cases:** Translating raw quaternion tracking data to skeletal transforms, automating procedural look-at eye bones, and creating headless avatar morph setups.
 
 ---
 
 ### Delivery Pipelines & File Formats
 
-* **[File Export Pipeline](integrations/file-export.md)**[cite: 2]
-  * **Contents:** Format structures and specifications for `.ftd` (sparse line-delimited key-value pairs omitting weights $\le 0.0001$) and `.json` (timestamped frame arrays)[cite: 1, 2].
-  * **Use Cases:** Non-realtime animation workflows, recorded mocap cleanup, custom DCC importer plugin development, and offline performance archival.
+- **[File Export Pipeline](integrations/file-export.md)**[cite: 2]
+  - **Contents:** Format structures and specifications for `.ftd` (sparse line-delimited key-value pairs omitting weights $\le 0.0001$) and `.json` (timestamped frame arrays).
+  - **Use Cases:** Non-realtime animation workflows, recorded mocap cleanup, custom DCC importer plugin development, and offline performance archival.
 
-* **[Live Capture UDP Protocol](integrations/live-capture.md)**[cite: 2]
-  * **Contents:** UDP socket configuration, network broadcast settings (`0.0.0.0`), port bindings, firewall setup, and raw string datagram payload definitions separated by pipe characters (`|`)[cite: 1, 2].
-  * **Use Cases:** Low-latency real-time tracking, live VTuber runtime applications, broadcast studio networking, and game engine integration.
+- **[Live Capture UDP Protocol](integrations/live-capture.md)**[cite: 2]
+  - **Contents:** UDP socket configuration, network broadcast settings (`0.0.0.0`), port bindings, firewall setup, and raw string datagram payload definitions separated by pipe characters (`|`).
+  - **Use Cases:** Low-latency real-time tracking, live VTuber runtime applications, broadcast studio networking, and game engine integration.
 
 ---
 
 ### Integration Reference Implementations
 
-Located within the **[Live Capture Guide](integrations/live-capture.md)**, complete runtime implementations are provided for rapid prototyping[cite: 1, 2]:
+Located within the **[Live Capture Guide](integrations/live-capture.md)**, complete runtime implementations are provided for rapid prototyping:
 
-* **Python UDP Receiver:** Lightweight socket listener for data logging, real-time metrics parsing, and terminal inspection[cite: 1, 2].
-  * **Use Cases:** Custom analytical dashboards, standalone robotics control, AI pipelines, and headless tracking verification.
-* **C# / Unity Receiver:** Multi-threaded, thread-safe runtime component featuring right-to-left-handed coordinate transforms, dynamic `SkinnedMeshRenderer` weight updates, and `preventDoubleJaw` transform filtering[cite: 1, 2].
-  * **Use Cases:** Direct avatar actuation in Unity, live streaming apps, interactive game mechanics, and virtual production runtimes.
+- **Python UDP Receiver:** Lightweight socket listener for data logging, real-time metrics parsing, and terminal inspection.
+  - **Use Cases:** Custom analytical dashboards, standalone robotics control, AI pipelines, and headless tracking verification.
+- **C# / Unity Receiver:** Multi-threaded, thread-safe runtime component featuring right-to-left-handed coordinate transforms, dynamic `SkinnedMeshRenderer` weight updates, and `preventDoubleJaw` transform filtering.
+  - **Use Cases:** Direct avatar actuation in Unity, live streaming apps, interactive game mechanics, and virtual production runtimes.
