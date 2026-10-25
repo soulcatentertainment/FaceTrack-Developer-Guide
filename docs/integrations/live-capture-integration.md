@@ -54,18 +54,16 @@ public class FaceTrackLiveReceiver : MonoBehaviour
     [Header("Network")]
     public int listenPort = 9000;
 
-    [Header("Target Bindings")]
-    public Transform headBone;
+    [Header("Target Mesh")]
     public SkinnedMeshRenderer faceMesh;
-    public bool preventDoubleJaw = true;
 
     private Thread receiveThread;
     private UdpClient udpClient;
     private bool isRunning = false;
 
     private readonly object lockObject = new object();
-    private Quaternion incomingRotation;
-    private float[] incomingBlendshapes = new float[53];
+    private readonly float[] incomingBlendshapes = new float[53];
+    private readonly float[] currentWeights = new float[53];
     private bool hasNewFrame = false;
 
     void Start()
@@ -90,23 +88,14 @@ public class FaceTrackLiveReceiver : MonoBehaviour
                 int splitIndex = message.IndexOf('|');
                 if (splitIndex < 0) continue;
 
-                string rotPart = message.Substring(0, splitIndex);
+                // Extract only the 53 comma-separated blendshape weights
                 string weightsPart = message.Substring(splitIndex + 1);
-
-                string[] rotValues = rotPart.Split(',');
                 string[] bsValues = weightsPart.Split(',');
 
-                if (rotValues.Length == 4 && bsValues.Length == 53)
+                if (bsValues.Length == 53)
                 {
-                    // Convert Right-Handed (Maxine) to Unity Left-Handed space
-                    float qx = float.Parse(rotValues[0], CultureInfo.InvariantCulture);
-                    float qy = -float.Parse(rotValues[1], CultureInfo.InvariantCulture);
-                    float qz = -float.Parse(rotValues[2], CultureInfo.InvariantCulture);
-                    float qw = float.Parse(rotValues[3], CultureInfo.InvariantCulture);
-
                     lock (lockObject)
                     {
-                        incomingRotation = new Quaternion(qx, qy, qz, qw);
                         for (int i = 0; i < 53; i++)
                         {
                             incomingBlendshapes[i] = float.Parse(bsValues[i], CultureInfo.InvariantCulture);
@@ -124,36 +113,20 @@ public class FaceTrackLiveReceiver : MonoBehaviour
 
     void Update()
     {
-        Quaternion targetRot;
-        float[] targetWeights = new float[53];
+        if (faceMesh == null) return;
 
         lock (lockObject)
         {
             if (!hasNewFrame) return;
-            targetRot = incomingRotation;
-            System.Array.Copy(incomingBlendshapes, targetWeights, 53);
+            System.Array.Copy(incomingBlendshapes, currentWeights, 53);
             hasNewFrame = false;
         }
 
-        // Apply Head Bone Rotation
-        if (headBone != null)
+        // Apply weights (FaceTrack outputs 0.0–1.0; Unity blendshapes require 0–100)
+        int shapeCount = Mathf.Min(53, faceMesh.sharedMesh.blendShapeCount);
+        for (int i = 0; i < shapeCount; i++)
         {
-            headBone.localRotation = targetRot;
-        }
-
-        // Apply Blendshape Weights
-        if (faceMesh != null)
-        {
-            for (int i = 0; i < 53; i++)
-            {
-                if (preventDoubleJaw && i == 26 && headBone != null) continue;
-
-                // Unity Blendshape weights range from 0 to 100
-                if (i < faceMesh.sharedMesh.blendShapeCount)
-                {
-                    faceMesh.SetBlendShapeWeight(i, targetWeights[i] * 100.0f);
-                }
-            }
+            faceMesh.SetBlendShapeWeight(i, currentWeights[i] * 100.0f);
         }
     }
 
