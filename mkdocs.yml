@@ -34,11 +34,11 @@ extra_javascript:
 nav:
   - Overview: index.md
   - Specifications:
-      - Blendshape Channels: specifications/blendshapes.md
+      - Blendshapes: specifications/blendshapes.md
       - Rigging & Kinematics: specifications/kinematics.md
   - Delivery Pipelines:
-      - File Export Formats: pipelines/file-export.md
-      - Live Capture (UDP): pipelines/live-capture.md
+      - File Export: pipelines/file-export.md
+      - Live Capture: pipelines/live-capture.md
   - Integrations:
       - Live Capture Samples: integrations/live-capture-integration.md
       # - Importer Samples: integrations/file-importer-integration.md
