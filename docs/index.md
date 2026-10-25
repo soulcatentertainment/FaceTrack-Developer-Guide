@@ -1,6 +1,6 @@
 # FaceTrack Developer Guide
 
-Welcome to the official developer integration guide for **FaceTrack** by SOUL CAT Entertainment Sdn Bhd[cite: 2]. This documentation provides the technical specifications, file schemas, network protocols, and rigging kinematics required to integrate third-party applications, game engines, and virtual avatar runtimes.
+Welcome to the official developer integration guide for **FaceTrack** by SOUL CAT Entertainment Sdn Bhd. This documentation provides the technical specifications, file schemas, network protocols, and rigging kinematics required to integrate third-party applications, game engines, and virtual avatar runtimes.
 
 ---
 
@@ -21,11 +21,11 @@ Explore the dedicated documentation modules below based on your development and 
 
 ### Specifications
 
-- **[53 Facial Blendshape Channels](specifications/blendshapes.md)**[cite: 2]
+- **[53 Facial Blendshape Channels](specifications/blendshapes.md)**
   - **Contents:** Complete index mapping (channels 0 to 52) across ARKit-compatible facial expressions, along with known channel constraints (e.g., zeroed `cheekPuff` targets and omitted tongue tracking).
   - **Use Cases:** Standardizing custom character blendshape names, creating facial morph targets in DCC software (Blender, Maya, ZBrush), and setting up animation retargeting profiles.
 
-- **[Rigging & Kinematics Implementation](pipelines/kinematics.md)**[cite: 2]
+- **[Rigging & Kinematics Implementation](pipelines/kinematics.md)**
   - **Contents:** Mathematical coordinate conversions (scalar-first ordering for Blender vs. axis-negation for Unity), linear Euler remapping formulas for rigs lacking head bones, and differential eye gaze kinematics for pitch/yaw bone rotation.
   - **Use Cases:** Translating raw quaternion tracking data to skeletal transforms, automating procedural look-at eye bones, and creating headless avatar morph setups.
 
@@ -33,11 +33,11 @@ Explore the dedicated documentation modules below based on your development and 
 
 ### Delivery Pipelines & File Formats
 
-- **[File Export Pipeline](integrations/file-export.md)**[cite: 2]
+- **[File Export Pipeline](integrations/file-export.md)**
   - **Contents:** Format structures and specifications for `.ftd` (sparse line-delimited key-value pairs omitting weights $\le 0.0001$) and `.json` (timestamped frame arrays).
   - **Use Cases:** Non-realtime animation workflows, recorded mocap cleanup, custom DCC importer plugin development, and offline performance archival.
 
-- **[Live Capture UDP Protocol](integrations/live-capture.md)**[cite: 2]
+- **[Live Capture UDP Protocol](integrations/live-capture.md)**
   - **Contents:** UDP socket configuration, network broadcast settings (`0.0.0.0`), port bindings, firewall setup, and raw string datagram payload definitions separated by pipe characters (`|`).
   - **Use Cases:** Low-latency real-time tracking, live VTuber runtime applications, broadcast studio networking, and game engine integration.
 
