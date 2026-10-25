@@ -17,6 +17,8 @@ theme:
   features:
     - content.code.copy
     - navigation.sections
+    - navigation.indexes
+    - navigation.expand
 
 markdown_extensions:
   - tables
@@ -29,3 +31,15 @@ markdown_extensions:
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Overview: index.md
+  - Specifications:
+      - Blendshape Channels: specifications/blendshapes.md
+      - Rigging & Kinematics: specifications/kinematics.md
+  - Delivery Pipelines:
+      - File Export Formats: pipelines/file-export.md
+      - Live Capture (UDP): pipelines/live-capture.md
+  - Integrations:
+      - Python Receiver: integrations/python.md
+      - Unity / C#: integrations/unity.md
