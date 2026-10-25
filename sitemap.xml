@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://soulcatentertainment.github.io/FaceTrack-Developer-Guide/</loc>
+         <lastmod>2026-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://soulcatentertainment.github.io/FaceTrack-Developer-Guide/integrations/live-capture-integration/</loc>
+         <lastmod>2026-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://soulcatentertainment.github.io/FaceTrack-Developer-Guide/pipelines/file-export/</loc>
+         <lastmod>2026-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://soulcatentertainment.github.io/FaceTrack-Developer-Guide/pipelines/live-capture/</loc>
+         <lastmod>2026-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://soulcatentertainment.github.io/FaceTrack-Developer-Guide/specifications/blendshapes/</loc>
+         <lastmod>2026-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://soulcatentertainment.github.io/FaceTrack-Developer-Guide/specifications/kinematics/</loc>
+         <lastmod>2026-10-25</lastmod>
+    </url>
+</urlset>
