@@ -49,7 +49,7 @@ while True:
     print(f"JawOpen: {jaw_open:.2f} | Blinks: ({blink_left:.2f}, {blink_right:.2f})")
 ```
 
-You can also download the full python receiver sample [here](../../scripts/livecapture_python_sample.py) to test out the Live Capture streaming.
+You can also download the full python receiver sample [here](https://github.com/soulcatentertainment/FaceTrack-Developer-Guide/blob/main/scripts/livecapture_python_sample.py) to test out the Live Capture streaming.
 
 ---
 
