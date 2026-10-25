@@ -10,8 +10,8 @@ FaceTrack uses NVIDIA RTX Maxine and Audio2Face deep-learning frameworks to extr
 
 The tracking system outputs a standardized 53-channel blendshape rig (based on the ARKit standard) paired with local head orientation quaternions. Facial tracking data is delivered through two distinct pipelines:
 
-- **File Export Pipeline:** Frame-by-frame baked data saved as either `.ftd` (a lightweight, sparse streaming log) or `.json` (human-readable structured data).
-- **Live Capture Pipeline:** Low-latency real-time UDP socket streaming transmitting head orientation and 53 blendshape coefficients simultaneously.
+- **[File Export Pipeline:](integrations/file-export.md)** Frame-by-frame baked data saved as either `.ftd` (a lightweight, sparse streaming log) or `.json` (human-readable structured data).
+- **[Live Capture UDP Protocol:](integrations/live-capture.md)** Low-latency real-time UDP socket streaming transmitting head orientation and 53 blendshape coefficients simultaneously.
 
 ---
 
@@ -45,7 +45,7 @@ Explore the dedicated documentation modules below based on your development and 
 
 ### Integration Reference Implementations
 
-Located within the **[Live Capture Guide](integrations/live-capture.md)**, complete runtime implementations are provided for rapid prototyping:
+Located within the **[Live Capture Integration Samples](integrations/live-capture-integration.md)**, complete runtime implementations are provided for reference:
 
 - **Python UDP Receiver:** Lightweight socket listener for data logging, real-time metrics parsing, and terminal inspection.
   - **Use Cases:** Custom analytical dashboards, standalone robotics control, AI pipelines, and headless tracking verification.
