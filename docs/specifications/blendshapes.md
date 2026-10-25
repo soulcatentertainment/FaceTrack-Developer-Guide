@@ -1,8 +1,10 @@
-# Blendshapes
+# Blendshapes Implementation
+
+FaceTrack outputs 53 facial blendshape channels (indexed **0 to 52**) based on the ARKit standard for easy integration with existing DCC applications.
 
 ## 53 Facial Blendshape Channels
 
-FaceTrack outputs 53 facial blendshape channels (indexed **0 to 52**) based on the ARKit standard, with both `browInnerUp` and `cheekPuff` split into bilateral (Left/Right) targets:
+Here are the 53 blendshapes channels, with both `browInnerUp` and `cheekPuff` split into bilateral (Left/Right) targets:
 
 | Index | Blendshape Name       | Category |
 | :---: | :-------------------- | :------- |
@@ -62,4 +64,4 @@ FaceTrack outputs 53 facial blendshape channels (indexed **0 to 52**) based on t
 
 ## Known Limitations
 
-However, `cheekPuffLeft`, `cheekPuffRight` are always set to zero as they are currently not supported. Tongue blendshapes are also omitted due to technical limitation.
+Keep in mind that `cheekPuffLeft`, `cheekPuffRight` are always set to zero as they are currently not supported. Tongue blendshapes are also omitted due to technical limitation.
