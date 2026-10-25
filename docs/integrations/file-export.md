@@ -95,6 +95,7 @@ The root JSON object encapsulates global capture metadata and an array of sequen
 * `y`: Float representing the $q_y$ axis component.
 * `z`: Float representing the $q_z$ axis component.
 * `w`: Float representing the $q_w$ scalar component.
+
 * **`blendshapes` Array:** An ordered list of expression objects defining facial weights:
 * `name`: String identifier corresponding to the FaceTrack 53-channel blendshape standard (e.g., `"browDownLeft"`).
 * `value`: Normalized floating-point weight between `0.0` and `1.0`.
