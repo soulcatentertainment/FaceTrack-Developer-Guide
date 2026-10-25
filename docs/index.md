@@ -25,7 +25,7 @@ Explore the dedicated documentation modules below based on your development and 
   - **Contents:** Complete index mapping (channels 0 to 52) across ARKit-compatible facial expressions, along with known channel constraints (e.g., zeroed `cheekPuff` targets and omitted tongue tracking).
   - **Use Cases:** Standardizing custom character blendshape names, creating facial morph targets in DCC software (Blender, Maya, ZBrush), and setting up animation retargeting profiles.
 
-- **[Rigging & Kinematics Implementation](pipelines/kinematics.md)**
+- **[Rigging & Kinematics Implementation](specifications/kinematics.md)**
   - **Contents:** Mathematical coordinate conversions (scalar-first ordering for Blender vs. axis-negation for Unity), linear Euler remapping formulas for rigs lacking head bones, and differential eye gaze kinematics for pitch/yaw bone rotation.
   - **Use Cases:** Translating raw quaternion tracking data to skeletal transforms, automating procedural look-at eye bones, and creating headless avatar morph setups.
 
@@ -33,11 +33,11 @@ Explore the dedicated documentation modules below based on your development and 
 
 ### Delivery Pipelines & File Formats
 
-- **[File Export Pipeline](integrations/file-export.md)**
+- **[File Export Pipeline](pipelines/file-export.md)**
   - **Contents:** Format structures and specifications for `.ftd` (sparse line-delimited key-value pairs omitting weights $\le 0.0001$) and `.json` (timestamped frame arrays).
   - **Use Cases:** Non-realtime animation workflows, recorded mocap cleanup, custom DCC importer plugin development, and offline performance archival.
 
-- **[Live Capture UDP Protocol](integrations/live-capture.md)**
+- **[Live Capture UDP Protocol](pipelines/live-capture.md)**
   - **Contents:** UDP socket configuration, network broadcast settings (`0.0.0.0`), port bindings, firewall setup, and raw string datagram payload definitions separated by pipe characters (`|`).
   - **Use Cases:** Low-latency real-time tracking, live VTuber runtime applications, broadcast studio networking, and game engine integration.
 

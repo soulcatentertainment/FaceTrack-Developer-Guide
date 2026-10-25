@@ -17,11 +17,11 @@ The documentation source files are located in the `docs/` directory:
     ├── index.md                          # Guide overview, architecture, and pipeline summary
     ├── specifications/
     │   └── blendshapes.md                # 53 ARKit-standard facial blendshape channel index
-    ├── pipelines/
     │   └── kinematics.md                 # Head orientation, Euler bounds, and eye gaze math
+    ├── pipelines/
+    │   ├── file-export.md                # Specifications for .ftd and .json offline formats
+    │   └── live-capture.md               # UDP streaming protocol, and payload format
     └── integrations/
-        ├── file-export.md                # Specifications for .ftd and .json offline formats
-        └── live-capture.md               # UDP streaming protocol, and payload format
         └── live-capture-integration.md   # Code samples to connect Live Capture streams
 
 ```
@@ -29,9 +29,10 @@ The documentation source files are located in the `docs/` directory:
 ---
 
 ## Core Topics Covered
-* **System Overview & Architecture:** High-fidelity performance extraction leveraging NVIDIA RTX Maxine and Audio2Face deep-learning frameworks.
-* **Facial Blendshape Channels:** Complete mapping of all 53 standard blendshape channels (0–52), noting unsupported channels (`cheekPuffLeft`/`Right` and tongue targets).
-* **Kinematics & Coordinate Conversions:** Formulae for converting Maxine right-handed coordinates to Unity left-handed space and Blender scalar-first formats, eye gaze bone differential actuation, and Euler remap bounds.
-* **File Formats:** Plaintext frame-delimited streaming files (`.ftd`) and structured frame arrays (`.json`).
-* **Live Capture UDP Streaming:** Datagram payload structures over UDP (default port `9000`) for low-latency live streaming.
-* **Sample Integrations:** Minimal receiver scripts in Python and multi-threaded C# scripts for Unity.
+
+- **System Overview & Architecture:** High-fidelity performance extraction leveraging NVIDIA RTX Maxine and Audio2Face deep-learning frameworks.
+- **Facial Blendshape Channels:** Complete mapping of all 53 standard blendshape channels (0–52), noting unsupported channels (`cheekPuffLeft`/`Right` and tongue targets).
+- **Kinematics & Coordinate Conversions:** Formulae for converting Maxine right-handed coordinates to Unity left-handed space and Blender scalar-first formats, eye gaze bone differential actuation, and Euler remap bounds.
+- **File Formats:** Plaintext frame-delimited streaming files (`.ftd`) and structured frame arrays (`.json`).
+- **Live Capture UDP Streaming:** Datagram payload structures over UDP (default port `9000`) for low-latency live streaming.
+- **Sample Integrations:** Minimal receiver scripts in Python and multi-threaded C# scripts for Unity.
