@@ -86,19 +86,18 @@ The `.json` file contains structured, pretty-printed frames intended for non-rea
 The root JSON object encapsulates global capture metadata and an array of sequential frame data:
 
 1. **Global Properties:**
-* `targetFPS`: An integer designating the capture and authoring framerate (e.g., `30`, `60`).
-* `frames`: An array containing sequential frame objects in chronological capture order.
+    * `targetFPS`: An integer designating the capture and authoring framerate (e.g., `30`, `60`).
+    * `frames`: An array containing sequential frame objects in chronological capture order.
 
 2. **Frame Object Properties (`frames[]`):**
-**`headRotation` Object:** Local-space rotation quaternion defined across four floating-point properties:
-* `x`: Float representing the $q_x$ axis component.
-* `y`: Float representing the $q_y$ axis component.
-* `z`: Float representing the $q_z$ axis component.
-* `w`: Float representing the $q_w$ scalar component.
-
-**`blendshapes` Array:** An ordered list of expression objects defining facial weights:
-* `name`: String identifier corresponding to the FaceTrack 53-channel blendshape standard (e.g., `"browDownLeft"`).
-* `value`: Normalized floating-point weight between `0.0` and `1.0`.
+    * **`headRotation` Object:** Local-space rotation quaternion defined across four floating-point properties:
+        * `x`: Float representing the $q_x$ axis component.
+        * `y`: Float representing the $q_y$ axis component.
+        * `z`: Float representing the $q_z$ axis component.
+        * `w`: Float representing the $q_w$ scalar component.
+    * **`blendshapes` Array:** An ordered list of expression objects defining facial weights:
+        * `name`: String identifier corresponding to the FaceTrack 53-channel blendshape standard (e.g., `"browDownLeft"`).
+        * `value`: Normalized floating-point weight between `0.0` and `1.0`.
 
 #### Example File Snippet
 ```json
