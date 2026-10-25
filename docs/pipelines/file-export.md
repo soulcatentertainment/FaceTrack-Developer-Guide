@@ -1,5 +1,35 @@
 # File Export Pipeline
 
+The **File Export Pipeline** allows animators, technical artists, and developers to extract recorded facial performance capture data from FaceTrack for offline processing, editing, and integration into standard 3D animation workflows.
+
+By decoupling the capture session from runtime rendering, you can cleanly import raw performance data into your Digital Content Creation (DCC) application of choice—such as Blender, Maya, Unreal Engine, or Unity—to refine keyframes, retarget morph targets, and layer secondary animation.
+
+### Key Capabilities
+
+- **Full Fidelity Capture:** Exports frame-accurate facial blendshape coefficients and 6-DOF head kinematics.
+- **Flexible Tooling Support:** Choose between streamlined binary storage or accessible structured text depending on pipeline requirements.
+- **Non-Destructive Integration:** Import tracked data as layered animation clips or modifier curves without altering base rig hierarchies.
+
+### Supported Export Formats
+
+| Format             | Extension | Primary Use Case                                 | Characteristics                                                                   |
+| :----------------- | :-------- | :----------------------------------------------- | :-------------------------------------------------------------------------------- |
+| **FaceTrack Data** | `.FTD`    | Production DCC animation, DCC importer add-ons   | Compact binary structure, optimized for performance and minimal file size.        |
+| **JSON**           | `.JSON`   | Pipeline scripting, engine tools, custom parsers | Human-readable, schema-driven, and easy to parse across any programming language. |
+
+---
+
+## Existing FaceTrack Importer
+
+### Blender Add-on
+
+You can download the official importer add-on for Blender [here](../../scripts/blender_ftd_importer.py).
+
+- **Supported Versions:** Blender 3.6+ / 4.x
+- **Features:** Automatic rig detection, shape key curve generation, and framerate synchronization.
+
+---
+
 ## File Formats Specification
 
 ### FaceTrack Data File (`.FTD`)
@@ -86,20 +116,21 @@ The `.json` file contains structured, pretty-printed frames intended for non-rea
 The root JSON object encapsulates global capture metadata and an array of sequential frame data:
 
 1. **Global Properties:**
-    * `targetFPS`: An integer designating the capture and authoring framerate (e.g., `30`, `60`).
-    * `frames`: An array containing sequential frame objects in chronological capture order.
+   - `targetFPS`: An integer designating the capture and authoring framerate (e.g., `30`, `60`).
+   - `frames`: An array containing sequential frame objects in chronological capture order.
 
 2. **Frame Object Properties (`frames[]`):**
-    * **`headRotation` Object:** Local-space rotation quaternion defined across four floating-point properties:
-        * `x`: Float representing the $q_x$ axis component.
-        * `y`: Float representing the $q_y$ axis component.
-        * `z`: Float representing the $q_z$ axis component.
-        * `w`: Float representing the $q_w$ scalar component.
-    * **`blendshapes` Array:** An ordered list of expression objects defining facial weights:
-        * `name`: String identifier corresponding to the FaceTrack 53-channel blendshape standard (e.g., `"browDownLeft"`).
-        * `value`: Normalized floating-point weight between `0.0` and `1.0`.
+   - **`headRotation` Object:** Local-space rotation quaternion defined across four floating-point properties:
+     - `x`: Float representing the $q_x$ axis component.
+     - `y`: Float representing the $q_y$ axis component.
+     - `z`: Float representing the $q_z$ axis component.
+     - `w`: Float representing the $q_w$ scalar component.
+   - **`blendshapes` Array:** An ordered list of expression objects defining facial weights:
+     - `name`: String identifier corresponding to the FaceTrack 53-channel blendshape standard (e.g., `"browDownLeft"`).
+     - `value`: Normalized floating-point weight between `0.0` and `1.0`.
 
 #### Example File Snippet
+
 ```json
 {
     "targetFPS": 30,
